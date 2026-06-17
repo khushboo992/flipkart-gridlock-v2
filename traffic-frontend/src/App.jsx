@@ -51,7 +51,7 @@ export default function App() {
   const [enforcementRigor, setEnforcementRigor] = useState(0); // 0% to 80% reduction simulation
 
   useEffect(() => {
-    // Yeh automatically check karega ki local chal raha hai ya GitHub Pages par
+    // Dynamic asset base resolution for GitHub Actions deployment compatibility
     const csvPath = `${import.meta.env.BASE_URL}bengaluru_traffic_violations.csv`;
 
     fetch(csvPath)
@@ -60,12 +60,10 @@ export default function App() {
         return res.text();
       })
       .then((text) => {
-        // ... rest of your code remains exactly the same
-        if (!res.ok) throw new Error("CSV file not found in public folder");
-        return res.text();
-      })
-      .then((text) => {
         const lines = text.split("\n").map((line) => line.split(","));
+        if (lines.length === 0 || !lines[0])
+          throw new Error("CSV file is completely empty.");
+
         const headers = lines[0].map((h) => h.trim().toLowerCase());
 
         const locIdx = headers.findIndex(
@@ -167,11 +165,9 @@ export default function App() {
       } catch (e) {}
     });
 
-    // Apply simulation impact parameters dynamic computation
     const hotspots = Object.values(hotspotMap)
       .map((h) => {
         const basePCI = h.pciScore;
-        // Reduce PCI score based on simulated enforcement efficacy level
         const simulatedPCI = Math.max(
           5,
           basePCI * (1 - enforcementRigor / 100),
@@ -271,7 +267,6 @@ export default function App() {
     gridLines: darkMode ? "#334155" : "#cbd5e1",
   };
 
-  // Calculate Total Simulated Revenue for the Top Nodes
   const totalRevenue = analytics.hotspots.reduce(
     (sum, h) => sum + h.simulatedRevenue,
     0,
@@ -702,7 +697,6 @@ export default function App() {
 
         {/* Right Graphs Suite */}
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-          {/* Deep Selected Info Node */}
           {selectedHotspot && (
             <div
               style={{
@@ -804,6 +798,7 @@ export default function App() {
                     stroke={theme.subText}
                     tick={{ fontSize: 9 }}
                   />
+                  {/* CRITICAL FIX: Removed tickFormatter to display raw pricing numerical layout */}
                   <YAxis stroke={theme.subText} domain={[0, 100]} />
                   <Tooltip
                     contentStyle={{
@@ -848,6 +843,7 @@ export default function App() {
                     tickFormatter={(h) => `${h}:00`}
                     tick={{ fontSize: 10 }}
                   />
+                  {/* CRITICAL FIX: Removed tickFormatter to display full numbers */}
                   <YAxis stroke={theme.subText} />
                   <Tooltip
                     contentStyle={{
