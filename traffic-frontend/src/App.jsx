@@ -51,8 +51,16 @@ export default function App() {
   const [enforcementRigor, setEnforcementRigor] = useState(0); // 0% to 80% reduction simulation
 
   useEffect(() => {
-    fetch("/bengaluru_traffic_violations.csv")
+    // Yeh automatically check karega ki local chal raha hai ya GitHub Pages par
+    const csvPath = `${import.meta.env.BASE_URL}bengaluru_traffic_violations.csv`;
+
+    fetch(csvPath)
       .then((res) => {
+        if (!res.ok) throw new Error(`CSV file not found at path: ${csvPath}`);
+        return res.text();
+      })
+      .then((text) => {
+        // ... rest of your code remains exactly the same
         if (!res.ok) throw new Error("CSV file not found in public folder");
         return res.text();
       })
