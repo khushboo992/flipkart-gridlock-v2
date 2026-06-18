@@ -1,8 +1,11 @@
 # 🚀 Real-Time Parking Congestion Analytics & Fleet Routing Optimizer
 
 **Submission Category:** Traffic Intelligence & Last-Mile Logistics Optimization
+
 **Team Name:** MonoMode
+
 **Developer:** Khushboo Rawat
+
 **Deployment Status:** Production Ready (Serverless Edge Architecture)
 
 ---
@@ -36,19 +39,11 @@ Traditional traffic engines rely on raw volumetric vehicle counting, failing to 
 
 ## 💻 Instructions to Run & Test
 
-### 📍 Method 1: Instant Online Testing (No Setup Required)
 
 Launch the fully compiled edge deployment instantly in any modern web browser:
 
 👉 **[https://khushboo992.github.io/flipkart-gridlock-v2/](https://khushboo992.github.io/flipkart-gridlock-v2/)**
 
-### 💻 Method 2: Local Machine Setup
-
-Copy, paste, and execute this single command chain in your terminal to completely clone, install, and launch the application locally (Requires Node.js 18+):
-
-git clone [https://github.com/khushboo992/flipkart-gridlock-v2.git](https://github.com/khushboo992/flipkart-gridlock-v2.git) && cd flipkart-gridlock-v2 && npm install && npm run dev
-
-Once initialized, open your browser and navigate to: http://localhost:5173
 
 ## ⚙️ Core Technical Stack & Architecture
 
